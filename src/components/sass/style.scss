@@ -1,7 +1,11 @@
+// Call font from fonts.google
+@import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
 $mainColor : #a20808;
 $subColor : green;
+$mainFont : Cairo;
 
-
+//  Start Scroll Style 
 * {
     box-sizing: border-box;
     outline: none;
@@ -31,17 +35,26 @@ $subColor : green;
     background: #ddd;
 }
 
+// End Scroll Style 
 
-@import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
 
+// App.vue
 .Products {
-    font-family: 'Cairo', sans-serif;
+    font-family: $mainFont;
     min-height: 100vh;
     display: flex;
     align-items: center;
     flex-flow: wrap;
     padding-top: 50px;
 
+    .overlay {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #000c;
+    }
+
+    // Product,vue
     .Product {
         border: 1px solid #f5f5f5;
         position: relative;
@@ -117,12 +130,12 @@ $subColor : green;
 
                     &.discount.text-right {
                         font-size: 12px;
-                        color: $subColor ;
+                        color: $subColor;
                     }
 
                     &.price.text-left {
-                        color: $subColor ;
-                        text-shadow: 0.4px 0.4px 2px $subColor ;
+                        color: $subColor;
+                        text-shadow: 0.4px 0.4px 2px $subColor;
                     }
 
 
@@ -172,76 +185,91 @@ $subColor : green;
         }
     }
 
+    // Popup.vue
     .modal {
         &.showPopup {
             display: block;
         }
-        .modal-body{
+
+        .modal-body {
             padding-bottom: 0;
+
             .card {
                 border: 0;
-        
+
                 .imgPopup {
                     display: flex;
                     align-items: center;
                     flex-flow: wrap;
                 }
+
                 .shortName {
                     font-size: 12px;
                     color: #555;
                     margin: 8px 0;
                 }
+
                 .moreDetails {
                     color: blue;
                     font-weight: bolder;
                     box-shadow: none;
                     line-height: 2;
                     cursor: pointer;
-                    font-size: 14px ;
+                    font-size: 14px;
+                    text-decoration: none;
                 }
+
                 .card-title {
                     margin-bottom: 5px;
                     font-size: 15px;
                     line-height: 1.5;
                 }
+
+                .orginalPrice {
+                    font-size: 12px;
+                    text-decoration: line-through;
+                    color: $mainColor;
+                }
             }
+
             .card-text {
-                color: $subColor ;
+                color: $subColor;
                 font-weight: 600;
                 font-size: 20px;
-                                
+
                 span {
                     font-size: 12px;
                     color: #a20808;
                     text-decoration: line-through;
                     margin: 0 10px 0 0;
                 }
+
                 .discount.text-right {
                     background: #4ea74e;
-                    font-size: 12px!important;
+                    font-size: 12px !important;
                     border-radius: 4px;
                     padding: 2px 7px;
-                    color: #fff!important;
-                    text-decoration: none!important;
+                    color: #fff !important;
+                    text-decoration: none !important;
                     float: right;
                     line-height: 2;
                 }
-                
+
 
             }
-        
+
             .Size {
                 padding: 0;
                 list-style: none;
                 border-top: 1px solid #ccc;
                 margin-top: 25px;
                 padding-top: 14px;
-        
+
                 h3 {
                     font-size: 16px;
                     font-weight: 600;
                 }
-        
+
                 li {
                     display: inline-block;
                     background: #f5f5f5;
@@ -253,11 +281,11 @@ $subColor : green;
                     border: 1px solid #ccc;
                     cursor: pointer;
                     font-size: 14px;
-        
+
                     &.active {
                         border: 1px solid #333;
                     }
-        
+
                     input {
                         position: absolute;
                         left: 0;
@@ -270,8 +298,8 @@ $subColor : green;
                 }
             }
         }
-        
-    
+
+
         .close,
         .close:not(:disabled):not(.disabled):active:focus {
             background: transparent;
@@ -281,41 +309,33 @@ $subColor : green;
             text-shadow: none;
             opacity: 1;
             letter-spacing: 1.5px;
-            box-shadow: none 
+            box-shadow: none
         }
-    
+
         button.btn-close {
             background: transparent;
             border: 0;
             color: $mainColor;
         }
-    
+
         .Add,
         .Add:not(:disabled):not(.disabled):active {
             border: 0;
             border-radius: 0;
             padding: 9px 20px;
-            background: #000 ;
+            background: #000;
             box-shadow: none;
             outline: none;
             letter-spacing: 1.5px;
             font-size: 14px;
+
             &.cart {
-                background: $subColor ;
+                background: $subColor;
             }
-    
+
         }
-    
-       
- 
+
+
+
     }
 }
- 
-
-.overlay {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    background: #000c;
-}
-

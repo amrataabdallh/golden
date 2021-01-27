@@ -18,6 +18,7 @@
         <p class="shortName"> {{product.brand_value }} </p>
         <ul>
           <li class="price text-left"> {{price.default_formated}} </li>
+
           <li class="discount text-right" v-if="discount > 0 "><span>-{{discount}} %</span> </li>
 
           <li class="orginalPrice text-left" v-if="price.default_original_formated"> {{price.default_original_formated}}
@@ -25,7 +26,7 @@
           <li class="discount text-right" v-if="diff > 0 "> Save {{diff}} {{product.currency}}</li>
         </ul>
         <!-- Button Add To Cart -->
-        <button type="button" class="btn btn-primary Add" v-on:click="$emit('openPopup', product, discount)">
+        <button type="button" class="btn btn-primary Add" v-on:click="$emit('openPopup', product)">
           Add
         </button>
       </div>
@@ -40,7 +41,6 @@
     name: 'Product',
     data() {
       return {
-        love: true
       }
     },
     props: {
@@ -50,12 +50,15 @@
       }
     },
     computed: {
+      // Get product currency
       price() {
         return this.product.price[this.product.currency]
       },
+      // Calculate the diffrence
       diff() {
         return this.price.default_original - this.price.default
       },
+      // Calculate the discount
       discount() {
         return ((this.diff / this.price.default_original) * 100).toFixed()
       }
@@ -64,5 +67,5 @@
 </script>
 
  <style lang="scss">
-  
+  //  If you need style file go to components/sass/style.scss
 </style>

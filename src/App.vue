@@ -3,9 +3,12 @@
   <div class="Products">
     <div class="container">
       <div class="row">
-        <Popup :product="product" :discount="discount"  v-if="showPopup" :class="{ showPopup : showPopup }" v-on:closePopup="closePopupMethod" />
-        <Product :product="product" v-for="product in products" :key="product.id"
-          v-on:openPopup="openPopupMethod" />
+
+        <!-- Call Popup components -->
+        <Popup :product="product" v-if="showPopup" :class="{ showPopup : showPopup }" v-on:closePopup="closePopupMethod" />
+     
+        <!-- Call Product components -->
+        <Product :product="product" v-for="product in products" :key="product.id" v-on:openPopup="openPopupMethod" />
       </div>
     </div>
   </div>
@@ -25,8 +28,7 @@
         product: {},
         products: [],
         errors: [],
-        showPopup: false,
-        discount: 0
+        showPopup: false
       }
     },
     components: {
@@ -34,6 +36,7 @@
       Popup
     },
     created() {
+      // XHR call
       axios.get(`https://gs-euw1-public-data-prod.s3-eu-west-1.amazonaws.com/new-web/test/test.json`, {}, {
           headers: {
             'Content-type': 'application/x-www-form-urlencoded',
@@ -48,26 +51,26 @@
         })
     },
     methods: {
-      openPopupMethod(product,discount) {
+      //  Open Modal
+      openPopupMethod(product) {
         this.product = product
-        this.discount = discount
         this.showPopup = true
         $('body').addClass('modal-open')
 
       },
+
+      //  Close Modal
       closePopupMethod() {
         this.product = {}
         this.showPopup = false
         $('body').removeClass('modal-open')
 
-}
+      }
     },
-    mounted() {
-
-    }
   }
 </script>
 
 <style lang="scss">
-@import 'components/sass/style.scss';
+  @import 'components/sass/style.scss';
+  //  If you need style file go to components/sass/style.scss
 </style>
